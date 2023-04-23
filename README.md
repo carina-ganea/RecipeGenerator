@@ -1,6 +1,6 @@
 # RecipeGenerator
 
-##Virtual environment activation
+## Virtual environment activation
 ```
 > .\venv\Scripts\Activate.bat
 ```
