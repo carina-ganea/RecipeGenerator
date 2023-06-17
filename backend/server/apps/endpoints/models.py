@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Endpoint(models.Model):
     '''
     The Endpoint object represents ML API endpoint.
@@ -12,6 +13,7 @@ class Endpoint(models.Model):
     name = models.CharField(max_length=128)
     owner = models.CharField(max_length=128)
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
+
 
 class MLAlgorithm(models.Model):
     '''
@@ -34,6 +36,7 @@ class MLAlgorithm(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     parent_endpoint = models.ForeignKey(Endpoint, on_delete=models.CASCADE)
 
+
 class MLAlgorithmStatus(models.Model):
     '''
     The MLAlgorithmStatus represent status of the MLAlgorithm which can change during the time.
@@ -50,7 +53,8 @@ class MLAlgorithmStatus(models.Model):
     active = models.BooleanField()
     created_by = models.CharField(max_length=128)
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
-    parent_mlalgorithm = models.ForeignKey(MLAlgorithm, on_delete=models.CASCADE, related_name = "status")
+    parent_mlalgorithm = models.ForeignKey(MLAlgorithm, on_delete=models.CASCADE, related_name="status")
+
 
 class MLRequest(models.Model):
     '''
@@ -70,3 +74,19 @@ class MLRequest(models.Model):
     feedback = models.CharField(max_length=10000, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
     parent_mlalgorithm = models.ForeignKey(MLAlgorithm, on_delete=models.CASCADE)
+
+
+class Food(models.Model):
+    name = models.CharField(max_length=255)
+    kcal_number = models.DecimalField(max_digits=6, decimal_places=2)
+
+
+class Ingredient(models.Model):
+    food = models.ForeignKey("Food", on_delete=models.CASCADE)
+    quantity = models.DecimalField(max_digits=6, decimal_places=2)
+    recipe = models.ForeignKey("Recipe", on_delete=models.CASCADE)
+
+
+class Recipe(models.Model):
+    title = models.CharField(max_length=255)
+    image = models.CharField(max_length=255, null=True, blank=True)
