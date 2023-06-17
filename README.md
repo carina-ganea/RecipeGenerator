@@ -2,5 +2,10 @@
 
 ## Virtual environment activation
 ```
-> .\venv\Scripts\Activate.bat
+> .\venv\Scripts\activate
+```
+## Run django app
+```
+> cd backend\server
+> python manage.py runserver
 ```
